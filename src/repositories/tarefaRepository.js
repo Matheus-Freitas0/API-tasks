@@ -1,6 +1,7 @@
 const Tarefa = require('../models/tarefa')
 
 class TarefaRepository {
+
     async getAllTarefas() {
         try {
             return await Tarefa.findAll()
@@ -8,6 +9,7 @@ class TarefaRepository {
             throw new Error('Erro ao buscar todas as tarefas: ' + error.message)
         }
     }
+
     async createTarefa(tarefaData) {
         try {
             return await Tarefa.create(tarefaData)
@@ -15,6 +17,7 @@ class TarefaRepository {
             throw new Error('Erro ao criar nova tarefa: ' + error.message)
         }
     }
+
     async getByIdTarefa(id) {
         try {
             return await Tarefa.findByPk(id)
@@ -23,5 +26,25 @@ class TarefaRepository {
         }
     }
 
+    async updateTarefa(id, tarefaData) {
+        try {
+          const tarefa = await Tarefa.findByPk(id)
+          if (!tarefa) {
+            res.status(404).json({ error: 'Tarefa não encontrada' })
+            return;
+          }
+      
+          await Tarefa.update(tarefaData, {
+            where: { id },
+            fields: ['titulo', 'descricao']
+          })
+      
+          const updatedTarefa = await Tarefa.findByPk(id)
+          return updatedTarefa;
+      
+        } catch (error) {
+          throw new Error('Erro ao atualizar tarefa: ' + error.message)
+        }
+      }
 }
 module.exports = new TarefaRepository()

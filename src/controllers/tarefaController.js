@@ -33,6 +33,19 @@ class TarefaController {
             res.status(500).json({ error: error.message })
         }
     }
+
+    async updateTarefa(req, res) {
+        const { id } = req.params
+        const { titulo, descricao } = req.body
+        
+        try {
+            const tarefa = await TarefaRepository.updateTarefa(id, { titulo, descricao })
+            res.status(200).json(tarefa)
+        }
+        catch(error){
+            res.status(500).json({ error: error.message })
+        }
+    }
 }
 
 module.exports = new TarefaController()

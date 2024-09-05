@@ -15,8 +15,13 @@ class TarefaRepository {
             throw new Error('Erro ao criar nova tarefa: ' + error.message)
         }
     }
-
-    // ...Implementar restante dos métodos (update, delete, getby id)
+    async getByIdTarefa(id) {
+        try {
+            return await Tarefa.findByPk(id)
+        } catch (error) {
+            throw new Error('Erro ao buscar tarefa por id: ' + error.message)
+        }
+    }
 
 }
 module.exports = new TarefaRepository()

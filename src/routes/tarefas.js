@@ -8,4 +8,7 @@ router.get('/', (req, res) => tarefaController.getAllTarefas
 router.post('/', (req, res) => tarefaController.createTarefa
     (req, res))
 
+router.get('/:id', (req, res) => tarefaController.getByIdTarefa
+    (req, res))
+    
 module.exports = router

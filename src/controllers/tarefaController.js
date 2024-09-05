@@ -9,7 +9,7 @@ class TarefaController {
             res.status(500).json({ error: error.message })
         }
     }
-    
+
     async createTarefa(req, res) {
         const { titulo, descricao, concluida } = req.body
         try {
@@ -21,7 +21,18 @@ class TarefaController {
         }
     }
 
-    // ...Implementar restante dos métodos (update, delete, getby id)
+    async getByIdTarefa(req, res) {
+        const { id } = req.params
+        try {
+            const tarefa = await TarefaRepository.getByIdTarefa(id)
+            if (!tarefa) {
+                res.status(404).json({ error: 'Tarefa não encontrada' })
+            }
+            res.json(tarefa)
+        } catch (error) {
+            res.status(500).json({ error: error.message })
+        }
+    }
 }
 
 module.exports = new TarefaController()

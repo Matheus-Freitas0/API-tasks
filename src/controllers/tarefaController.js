@@ -9,6 +9,7 @@ class TarefaController {
             res.status(500).json({ error: error.message })
         }
     }
+    
     async createTarefa(req, res) {
         const { titulo, descricao, concluida } = req.body
         try {

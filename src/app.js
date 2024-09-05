@@ -16,4 +16,4 @@ sequelize.sync()
             console.log(`Servidor rodando em <http://localhost>:${port}`);
         });
     })
-    .catch(err => console.error('Erro ao sincronizar banco de dados:', err))
+    .catch(err => console.error('Erro ao sincronizar banco de dados:', err));

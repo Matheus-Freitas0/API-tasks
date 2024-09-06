@@ -28,24 +28,37 @@ class TarefaRepository {
 
     async updateTarefa(id, tarefaData) {
         try {
-          const tarefa = await Tarefa.findByPk(id)
-          if (!tarefa) {
-            throw new Error({ error: 'Tarefa não encontrada' })
-          }
-      
-          await Tarefa.update(tarefaData, {
-            where: { id },
-            fields: ['titulo', 'descricao']
-          })
-      
-          const updatedTarefa = await Tarefa.findByPk(id)
-          return updatedTarefa;
-      
+            const tarefa = await Tarefa.findByPk(id)
+            if (!tarefa) {
+                throw new Error({ error: 'Tarefa não encontrada' })
+            }
+
+            await Tarefa.update(tarefaData, {
+                where: { id },
+                fields: ['titulo', 'descricao']
+            })
+
+            const updatedTarefa = await Tarefa.findByPk(id)
+            return updatedTarefa;
+
         } catch (error) {
-          throw new Error('Erro ao atualizar tarefa: ' + error.message)
+            throw new Error('Erro ao atualizar tarefa: ' + error.message)
         }
-      }
-      
+    }
+    async deleteTarefa(id) {
+        try {
+            const tarefa = await Tarefa.findByPk(id)
+            if (!tarefa) {
+                throw new Error({ error: 'Tarefa não encontrada' })
+            }
+
+            await Tarefa.destroy({ where: { id: 1 } })
+            return { message: 'Tarefa deletada com sucesso' }
+        
+        } catch (error) {
+            throw new Error('Erro ao deletar tarefa: ' + error.message)
+        }
+    }
 }
 
 module.exports = new TarefaRepository()

@@ -30,8 +30,7 @@ class TarefaRepository {
         try {
           const tarefa = await Tarefa.findByPk(id)
           if (!tarefa) {
-            res.status(404).json({ error: 'Tarefa não encontrada' })
-            return;
+            throw new Error({ error: 'Tarefa não encontrada' })
           }
       
           await Tarefa.update(tarefaData, {
@@ -46,5 +45,7 @@ class TarefaRepository {
           throw new Error('Erro ao atualizar tarefa: ' + error.message)
         }
       }
+      
 }
+
 module.exports = new TarefaRepository()

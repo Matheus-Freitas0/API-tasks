@@ -14,4 +14,7 @@ router.get('/:id', (req, res) => tarefaController.getByIdTarefa
 router.put('/:id', (req, res) => tarefaController.updateTarefa
     (req, res))   
 
+router.delete('/:id', (req, res) => tarefaController.deleteTarefa
+    (req, res))
+
 module.exports = router

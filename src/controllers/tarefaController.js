@@ -37,12 +37,23 @@ class TarefaController {
     async updateTarefa(req, res) {
         const { id } = req.params
         const { titulo, descricao } = req.body
-        
+
         try {
             const tarefa = await TarefaRepository.updateTarefa(id, { titulo, descricao })
             res.status(200).json(tarefa)
         }
-        catch(error){
+        catch (error) {
+            res.status(500).json({ error: error.message })
+        }
+    }
+    async deleteTarefa(req, res) {
+        const { id } = req.params
+        
+        try {
+            await TarefaRepository.deleteTarefa(id)
+            res.status(204).json()
+        } 
+        catch (error) {
             res.status(500).json({ error: error.message })
         }
     }

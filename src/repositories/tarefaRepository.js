@@ -52,7 +52,7 @@ class TarefaRepository {
                 throw new Error({ error: 'Tarefa não encontrada' })
             }
 
-            await Tarefa.destroy({ where: { id: 1 } })
+            await Tarefa.destroy({ where: { id } })
             return { message: 'Tarefa deletada com sucesso' }
         
         } catch (error) {

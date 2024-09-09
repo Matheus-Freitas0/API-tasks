@@ -71,6 +71,16 @@ class TarefaRepository {
             throw new Error('Erro ao deletar tarefas: ' + error.message)
         }
     }
+
+    async getByIdsTarefas(ids) {
+        try {
+            const tarefas = await Tarefa.findAll({ where: { id: { [Op.in]: ids } } })
+            return tarefas;
+        
+        } catch (error) {
+            throw new Error('Erro ao buscar tarefas: ' + error.message)
+        }
+    }
 }
 
 module.exports = new TarefaRepository()

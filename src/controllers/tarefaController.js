@@ -73,6 +73,24 @@ class TarefaController {
             res.status(500).json({ error: error.message });
         }
     }
+
+    async getByIdsTarefas(req, res) {
+        const { ids } = req.body;
+        
+        if (!ids || !Array.isArray(ids) || ids.length === 0) {
+            return res.status(400).json({ error: 'Lista de IDs inválida' });
+        }
+        try {
+            const tarefas = await TarefaRepository.getByIdsTarefas(ids);
+            if (tarefas.length === 0) {
+                return res.status(404).json({ error: 'Nenhuma tarefa encontrada' });
+            }
+            res.status(200).json(tarefas);
+        }
+        catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
 }
 
 module.exports = new TarefaController()

@@ -1,4 +1,5 @@
 const Tarefa = require('../models/tarefa')
+const { Op } = require('sequelize');
 
 class TarefaRepository {
 
@@ -45,6 +46,7 @@ class TarefaRepository {
             throw new Error('Erro ao atualizar tarefa: ' + error.message)
         }
     }
+
     async deleteTarefa(id) {
         try {
             const tarefa = await Tarefa.findByPk(id)
@@ -54,9 +56,19 @@ class TarefaRepository {
 
             await Tarefa.destroy({ where: { id } })
             return { message: 'Tarefa deletada com sucesso' }
-        
+
         } catch (error) {
             throw new Error('Erro ao deletar tarefa: ' + error.message)
+        }
+    }
+
+    async deleteManyTarefas(ids) {
+        try {
+            await Tarefa.destroy({ where: { id: { [Op.in]: ids } } })
+            return { message: 'Tarefas deletadas com sucesso' }
+
+        } catch (error) {
+            throw new Error('Erro ao deletar tarefas: ' + error.message)
         }
     }
 }

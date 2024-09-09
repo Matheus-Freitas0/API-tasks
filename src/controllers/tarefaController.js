@@ -46,15 +46,31 @@ class TarefaController {
             res.status(500).json({ error: error.message })
         }
     }
+
     async deleteTarefa(req, res) {
         const { id } = req.params
-        
+
         try {
             await TarefaRepository.deleteTarefa(id)
             res.status(204).json()
-        } 
+        }
         catch (error) {
             res.status(500).json({ error: error.message })
+        }
+    }
+
+    async deleteManyTarefas(req, res) {
+        const { ids } = req.body;
+
+        if (!ids || !Array.isArray(ids) || ids.length === 0) {
+            return res.status(400).json({ error: 'Lista de IDs inválida' });
+        }
+        try {
+            await TarefaRepository.deleteManyTarefas(ids);
+            res.status(204).json();
+        }
+        catch (error) {
+            res.status(500).json({ error: error.message });
         }
     }
 }

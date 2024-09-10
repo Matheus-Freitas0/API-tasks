@@ -26,25 +26,44 @@ class TarefaRepository {
         }
     }
 
-    async updateTarefa(id, tarefaData) {
+    async updateEditTarefa(id, tarefaData) {
         try {
-          const tarefa = await Tarefa.findByPk(id)
-          if (!tarefa) {
-            res.status(404).json({ error: 'Tarefa não encontrada' })
-            return;
-          }
-      
-          await Tarefa.update(tarefaData, {
-            where: { id },
-            fields: ['titulo', 'descricao']
-          })
-      
-          const updatedTarefa = await Tarefa.findByPk(id)
-          return updatedTarefa;
-      
+            const tarefa = await Tarefa.findByPk(id)
+            if (!tarefa) {
+                return null;
+            }
+
+            await Tarefa.update(tarefaData, {
+                where: { id },
+                fields: ['titulo', 'descricao']
+            })
+
+            const updatedTarefa = await Tarefa.findByPk(id)
+            return updatedTarefa;
+
         } catch (error) {
-          throw new Error('Erro ao atualizar tarefa: ' + error.message)
+            throw new Error('Erro ao atualizar tarefa: ' + error.message)
         }
-      }
+    }
+
+    async updateConcluirTarefa(id, tarefaData) {
+        try {
+            const tarefa = await Tarefa.findByPk(id);
+            if (!tarefa) {
+                return null;
+            }
+
+            await Tarefa.update(tarefaData, {
+                where: { id },
+                fields: ['concluida']
+            });
+
+            const updatedTarefa = await Tarefa.findByPk(id);
+            return updatedTarefa;
+        } catch (error) {
+            throw new Error('Erro ao atualizar tarefa: ' + error.message);
+        }
+    }
+
 }
 module.exports = new TarefaRepository()

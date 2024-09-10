@@ -11,7 +11,10 @@ router.post('/', (req, res) => tarefaController.createTarefa
 router.get('/:id', (req, res) => tarefaController.getByIdTarefa
     (req, res))
 
-router.put('/:id', (req, res) => tarefaController.updateTarefa
-    (req, res))   
+router.put('/:id', (req, res) => tarefaController.updateEditTarefa
+    (req, res))
+
+router.put('/concluida/:id', (req, res) => tarefaController.updateConcluirTarefa
+    (req, res)) 
 
 module.exports = router

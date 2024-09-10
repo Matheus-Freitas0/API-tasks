@@ -34,12 +34,12 @@ class TarefaController {
         }
     }
 
-    async updateEditTarefa(req, res) {
+    async updateTarefa(req, res) {
         const { id } = req.params
         const { titulo, descricao } = req.body
 
         try {
-            const tarefa = await TarefaRepository.updateEditTarefa(id, { titulo, descricao })
+            const tarefa = await TarefaRepository.updateTarefa(id, { titulo, descricao })
             res.status(200).json(tarefa)
         }
         catch (error) {
@@ -47,28 +47,50 @@ class TarefaController {
         }
     }
 
-    async updateConcluirTarefa(req, res) {
-        const { id } = req.params;
-        const { concluida } = req.body;
-
-        if (!id || concluida === undefined) {
-            return res.status(400).json({ error: 'ID e status de conclusão são obrigatórios' });
-        }
+    async deleteTarefa(req, res) {
+        const { id } = req.params
 
         try {
-            const updatedTarefa = await TarefaRepository.updateConcluirTarefa(id, { concluida });
-
-            if (!updatedTarefa) {
-                return res.status(404).json({ error: 'Tarefa não encontrada' });
-            }
-
-            return res.status(200).json(updatedTarefa);
-        } catch (error) {
-            return res.status(500).json({ error: error.message });
+            await TarefaRepository.deleteTarefa(id)
+            res.status(204).json()
+        }
+        catch (error) {
+            res.status(500).json({ error: error.message })
         }
     }
 
+    async deleteManyTarefas(req, res) {
+        const { ids } = req.body;
 
+        if (!ids || !Array.isArray(ids) || ids.length === 0) {
+            return res.status(400).json({ error: 'Lista de IDs inválida' });
+        }
+        try {
+            await TarefaRepository.deleteManyTarefas(ids);
+            res.status(204).json();
+        }
+        catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+
+    async getByIdsTarefas(req, res) {
+        const { ids } = req.body;
+        
+        if (!ids || !Array.isArray(ids) || ids.length === 0) {
+            return res.status(400).json({ error: 'Lista de IDs inválida' });
+        }
+        try {
+            const tarefas = await TarefaRepository.getByIdsTarefas(ids);
+            if (tarefas.length === 0) {
+                return res.status(404).json({ error: 'Nenhuma tarefa encontrada' });
+            }
+            res.status(200).json(tarefas);
+        }
+        catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
 }
 
 module.exports = new TarefaController()

@@ -13,7 +13,7 @@ router.put('/:id', (req, res) => tarefaController.updateEditTarefa
 
 router.put('/concluida/:id', (req, res) => tarefaController.updateConcluirTarefa
     (req, res)) 
-    
+
 router.post('/byIds', (req, res) => tarefaController.getByIdsTarefas
     (req, res));
 

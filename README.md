@@ -67,7 +67,7 @@ Para realizar o deploy do projeto, siga os seguintes passos:
 
 ## Contribuição
 
-Se você deseja contribuir com o projeto, por favor, leia o arquivo `CONTRIBUTING.md` para obter mais informações.
+Se você deseja contribuir com o projeto, por favor, faça um fork do repositório, crie uma nova branch para suas alterações.
 
 ## Licença
 

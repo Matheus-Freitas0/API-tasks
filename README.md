@@ -34,8 +34,8 @@ O projeto API Tasks é uma API RESTful para gerenciamento de tarefas, desenvolvi
 
 ## Exemplos de Uso
 
-* Criar uma tarefa: `POST /tasks` com o corpo `{ title: 'Nova tarefa', description: 'Descrição da tarefa' }`
-* Listar tarefas: `GET /tasks`
+* Criar uma tarefa: `POST /tarefas/` com o corpo `{ titulo: 'Nova tarefa', descricao: 'Descrição da tarefa' }`
+* Listar tarefas: `GET /tarefas/`
 
 ## Arquitetura
 
@@ -67,7 +67,7 @@ Para realizar o deploy do projeto, siga os seguintes passos:
 
 ## Contribuição
 
-Se você deseja contribuir com o projeto, por favor, leia o arquivo `CONTRIBUTING.md` para obter mais informações.
+Se você deseja contribuir com o projeto, por favor, faça um fork do repositório, crie uma nova branch para suas alterações.
 
 ## Licença
 

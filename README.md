@@ -34,8 +34,97 @@ O projeto API Tasks é uma API RESTful para gerenciamento de tarefas, desenvolvi
 
 ## Exemplos de Uso
 
-* Criar uma tarefa: `POST /tarefas/` com o corpo `{ titulo: 'Nova tarefa', descricao: 'Descrição da tarefa' }`
-* Listar tarefas: `GET /tarefas/`
+###   **Criar uma tarefa**:
+    
+   -   **Método**: `POST`
+   -   **Rota**: `/tarefas/`
+   -   **Corpo**:
+
+        `{
+          "titulo": "Nova tarefa",
+          "descricao": "Descrição da tarefa"
+        }` 
+        
+   -   **Descrição**: Cria uma nova tarefa.
+
+###   **Listar todas as tarefas**:
+    
+   -   **Método**: `GET`
+   -   **Rota**: `/tarefas/`
+   -   **Descrição**: Retorna uma lista de todas as tarefas.
+
+###   **Obter uma tarefa por ID**:
+    
+   -   **Método**: `GET`
+   -   **Rota**: `/tarefas/:id`
+   -   **Parâmetros**: `:id` - ID da tarefa
+   -   **Descrição**: Retorna os detalhes de uma tarefa específica com base no ID fornecido.
+
+###   **Atualizar uma tarefa**:
+    
+   -   **Método**: `PUT`
+   -   **Rota**: `/tarefas/:id`
+   -   **Parâmetros**: `:id` - ID da tarefa
+   -   **Corpo**:
+
+        `{
+          "titulo": "Título atualizado",
+          "descricao": "Descrição atualizada"
+        }` 
+        
+   -   **Descrição**: Atualiza os dados de uma tarefa específica.
+
+###  **Marcar uma tarefa como concluída**:
+    
+   -   **Método**: `PUT`
+   -   **Rota**: `/tarefas/concluida/:id`
+   -   **Parâmetros**: `:id` - ID da tarefa
+   -   **Descrição**: Marca uma tarefa como concluída.
+
+###   **Obter várias tarefas por IDs**:
+    
+   -   **Método**: `POST`
+   -   **Rota**: `/tarefas/byIds`
+   -   **Corpo**:
+        
+        `{
+          "ids": [1, 2, 3]
+        }` 
+        
+   -   **Descrição**: Retorna uma lista de tarefas com base nos IDs fornecidos no corpo da requisição.
+
+###  **Excluir uma tarefa**:
+    
+   -   **Método**: `DELETE`
+   -   **Rota**: `/tarefas/:id`
+   -   **Parâmetros**: `:id` - ID da tarefa
+   -   **Descrição**: Exclui uma tarefa específica com base no ID fornecido.
+
+###  Excluir várias tarefas
+  
+  -   **Método**: `DELETE`
+  -   **Rota**: `/tarefas/`
+  -   **Corpo**:
+        
+        `{
+          "ids": [1, 2, 3]
+        }` 
+        
+-   **Descrição**: Exclui várias tarefas com base nos IDs fornecidos no corpo da requisição.
+### Atualizar uma tarefa (edição específica)
+
+-   **Método**: `PUT`
+-   **Rota**: `/tarefas/edicao/:id`
+-   **Parâmetros**:
+    -   `:id` - ID da tarefa
+-   **Corpo**:
+
+    `{
+      "titulo": "Título editado",
+      "descricao": "Descrição editada"
+    }` 
+    
+-   **Descrição**: Atualiza os dados de uma tarefa específica com base no ID fornecido, similar à atualização geral.
 
 ## Arquitetura
 

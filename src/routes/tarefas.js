@@ -8,7 +8,7 @@ router.get('/', (req, res) => tarefaController.getAllTarefas
 router.get('/:id', (req, res) => tarefaController.getByIdTarefa
     (req, res))
 
-router.put('/:id', (req, res) => tarefaController.updateEditTarefa
+router.put('edicao/:id', (req, res) => tarefaController.updateEditTarefa
     (req, res));
 
 router.put('/concluida/:id', (req, res) => tarefaController.updateConcluirTarefa
